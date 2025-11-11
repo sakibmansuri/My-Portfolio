@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #252525;
+            --accent: #31ff80;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #3a3a3a, #969696);
+            background-size: 400% 400%;
+            animation: gradientShift 5s ease infinite;
+            color: var(--text-color);
+            font-family: 'Roboto Mono', monospace;
+            min-height: 100vh;
+        }
+
+        /* Keyframes for smooth animation */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* body {
+            font-family: 'Roboto Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        } */
+
+        /* ---------------- NAVBAR ---------------- */
+        header {
+            background: rgba(107, 107, 107, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .logo {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 25px;
+            font-family: Arial;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.5s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* ---------------- SECTIONS ---------------- */
+        .section {
+            padding: 4rem 6rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5rem;
+        }
+
+        .hero-text {
+            font-size: 25px;
+            max-width: 400px;
+        }
+
+        .tagline {
+            font-size: 25px;
+        }
+
+        .hero-photo img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 15px rgb(0, 136, 11);
+            object-fit: fill;
+            transition: transform 0.7s ease, box-shadow 0.5s ease;
+        }
+
+        .hero-photo img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgb(0, 255, 8);
+        }
+
+        .para {
+            font-size: 40px;
+        }
+
+        .abt {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .connect {
+            font-size: 25px;
+        }
+
+
+        .linktree ul {
+            font-size: 20px;
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .linktree li {
+            margin: 0.5rem 0;
+        }
+
+        .linktree a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .linktree a:hover {
+            opacity: 0.7;
+        }
+
+        .skills-list {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .skills-list li {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .skills-list li:hover {
+            background-color: #000000;
+            cursor: pointer;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.185);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(60, 255, 0, 0.603);
+        }
+
+        .project-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1);
+        }
+
+        .project-card:hover .project-image {
+            opacity: .5;
+        }
+
+        .project-info {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.507);
+            border-radius: 20px;
+            padding: 1rem;
+            transition: background 0.5s ease;
+        }
+
+        .project-card:hover .project-info {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* ---------------- FORM ---------------- */
+        /* form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 2rem auto 0;
+        }
+
+        input,
+        textarea {
+            padding: 0.75rem;
+            border: 1px solid #333;
+            background: #111;
+            color: var(--text-color);
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 0.75rem;
+            background: var(--accent);
+            color: #000;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        } */
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #777;
+            font-size: 1rem;
+        }
+
+        /* ---------------- MOBILE RESPONSIVENESS ---------------- */
+
+        /* For tablets and smaller (<= 900px) */
+        @media (max-width: 900px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                justify-content: center;
+                margin-top: 1rem;
+            }
+
+            .section {
+                padding: 5rem 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        /* For phones (<= 600px) */
+        @media (max-width: 600px) {
+            body {
+                font-size: 1rem;
+            }
+
+            header {
+                padding: 1rem;
+                background-color: #575757;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-photo img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .logo {
+                font-size: 45px;
+            }
+
+            .nav-links {
+                display: none;
+                /* Hidden by default on mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="logo">Sakib.</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="section hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Hello there, I’m Sakib Mansuri</h2>
+                <p class="tagline">Beginner Web developer</p>
+            </div>
+            <div class="hero-photo">
+                <img src="https://avatars.githubusercontent.com/u/235620183?v=4" alt="My photo">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="para">About Me</h2>
+        <p class="abt">
+            HEY! I am Sakib, a beginner web developer who loves to build clean, functional, responsive & engaging
+            websites. I'm currently looking for freelance opportunities on modern web projects or front-end development.
+            My toolkit includes HTML, CSS, JavaScript and a growing interest in AI-driven web automation. I'm constantly
+            looking
+            exploring new programming languages and refining them by building real-life projects.
+
+        </p>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="para">Skills</h2>
+        <ul class="skills-list">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>React</li>
+        </ul>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="para">Projects</h2>
+        <div class="projects-grid">
+            <!-- 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="#" alt="Project preview">
+                </div>
+                <div class="project-info">
+                    <h3>E-commerce site</h3>
+                    <p>A modern e-commerce website.</p>
+                    <a href="#" class="project-btn" style="color: rgb(66, 255, 66); font-size: 18px;">View Project</a>
+                </div>
+            </div>
+
+            <!-- 2 -->
+             <div class="project-card">
+                <div class="project-image">
+                    <img src="https://sakibmansuri.github.io/Images/portfolio.PNG" alt="Project preview">
+                </div>
+                <div class="project-info">
+                    <h3>Portfolio</h3>
+                    <p>My Portfolio.</p>
+                    <a href="#" class="project-btn" style="color: rgb(66, 255, 66); font-size: 18px;">View Project</a>
+                </div>
+            </div>
+
+            <!-- 3 -->
+             <div class="project-card">
+                <div class="project-image">
+                    <img src="https://sakibmansuri.github.io/Images/rockpaperscissors.PNG" alt="Project preview">
+                </div>
+                <div class="project-info">
+                    <h3>Rock Paper Scissors</h3>
+                    <p>A mini game with auto-play feature.</p>
+                    <a href="https://sakibmansuri.github.io/Rock-paper-scissors-sakib/" class="project-btn" style="color: rgb(66, 255, 66); font-size: 18px;">View Project</a>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://sakibmansuri.github.io/Images/todolist.PNG" alt="Project preview">
+                </div>
+                <div class="project-info">
+                    <h3>To-do List</h3>
+                    <p>A simple to-do list.</p>
+                    <a href="https://sakibmansuri.github.io/To-do-list/" class="project-btn" style="color: rgb(66, 255, 66); font-size: 18px;">View Project</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="para">Contact</h2>
+        <p style="font-size: 25px;">Want to work together or just say hi? Reach out below:</p>
+         <div class="linktree">
+            <h3 class="connect">Connect with me</h3>
+            <ul>
+                <li><a href="https://github.com/sakibmansuri">GitHub</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="https://wa.me/9619755827">Chat on WhatsApp</a></li>
+                <li><a href="#" download="MyResume.jpeg">My Resume</a></li>
+                <li><a href="https://www.instagram.com/mr.fishking_?igsh=MTdnbzF1amo5ZjdobQ==">Instagram</a></li>
+                <li><a href="mailto:sakibmansuri2305@gmail.com">Email</a></li>
+            </ul>
+        </div>
+        
+    </section>
+
+    <footer>
+        <p style="color: rgb(54, 255, 47);">© Sakib. — All rights reserved</p>
+    </footer>
+</body>
+
+</html>
