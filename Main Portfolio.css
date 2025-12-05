@@ -274,6 +274,14 @@
     font-size: 25px;
  }
 
+ .more h2 {
+    transition: all 0.3s ease;
+ }
+
+ .more h2:hover {
+    opacity: .7;
+ }
+
  footer {
      text-align: center;
      padding: 2rem;
